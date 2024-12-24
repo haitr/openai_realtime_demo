@@ -48,3 +48,6 @@ app.*.map.json
 .metadata
 pubspec.lock
 .env
+ios/Podfile.lock
+lib/objectbox-model.json
+lib/objectbox.g.dart
