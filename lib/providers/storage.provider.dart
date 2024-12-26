@@ -6,6 +6,4 @@ import '../services/storage.service.dart';
 part 'storage.provider.g.dart';
 
 @riverpod
-Future<StorageService> storage(Ref ref) async {
-  return StorageService.create();
-}
+Future<StorageService> storage(Ref ref) async => StorageService.create();

@@ -4,9 +4,8 @@ import 'package:objectbox/objectbox.dart';
 class Scenario {
   @Id()
   late int id;
-
   String title;
   String content;
 
-  Scenario(this.title, {this.content = ''});
+  Scenario(this.title, {this.content = '', this.id = 0});
 }

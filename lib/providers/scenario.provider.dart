@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../models/prompt.model.dart';
@@ -5,16 +6,9 @@ import 'storage.provider.dart';
 
 part 'scenario.provider.g.dart';
 
-@riverpod
-class ScenarioNotifier extends _$ScenarioNotifier {
-  @override
-  Future<List<Scenario>> build() async {
-    final storage = await ref.watch(storageProvider.future);
-
-    return [
-      Scenario(
-        "Default",
-        content: '''
+final defaultScenario = Scenario(
+  "Default",
+  content: '''
   Instructions:
   You are an AI tutor playing the role of Interviewer with expertise in social media marketing and trend analysis.. The learner is acting as Social Media Marketer seeking to boost influencer engagement and manage digital campaigns., In a bustling office with panoramic views, the learner interviews for a social media marketer position. The AI interviewer evaluates the applicant's innovative strategies to enhance influencer engagement and address market trends amidst tight competition.. Your job is to present situations that allow the learner to practice Strategic thinking in social media engagement.. **You must only act as the Interviewer with expertise in social media marketing and trend analysis. and never behave like the Social Media Marketer seeking to boost influencer engagement and manage digital campaigns.**
 
@@ -58,8 +52,21 @@ class ScenarioNotifier extends _$ScenarioNotifier {
   Conversation Language:
   - Korean
         ''',
-      ),
+);
+
+@riverpod
+class ScenarioNotifier extends _$ScenarioNotifier {
+  @override
+  Future<List<Scenario>> build() async {
+    final storage = await ref.watch(storageProvider.future);
+
+    return [
+      defaultScenario,
       ...storage.getScenarioList(),
     ];
   }
 }
+
+@riverpod
+Future<Scenario> scenario(Ref ref, int id) =>
+    ref.watch(storageProvider.future).then((storage) => storage.getScenario(id) ?? defaultScenario);

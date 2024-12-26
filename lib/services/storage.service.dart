@@ -19,4 +19,6 @@ class StorageService {
   }
 
   List<Scenario> getScenarioList() => _promptBox.getAll();
+
+  Scenario? getScenario(int id) => _promptBox.get(id);
 }
