@@ -1,12 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ai.provider.dart';
+part of 'conversation.provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$conversationHash() => r'457f184baeaaaf3626da4d496b36773e2d185388';
+String _$audioStreamHash() => r'5c811b24225bc43e6241e2467ae4e8cc7fcde2ee';
+
+/// See also [audioStream].
+@ProviderFor(audioStream)
+final audioStreamProvider = AutoDisposeStreamProvider<Uint8List>.internal(
+  audioStream,
+  name: r'audioStreamProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$audioStreamHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AudioStreamRef = AutoDisposeStreamProviderRef<Uint8List>;
+String _$conversationHash() => r'b35571892b22c3306f10eadf59edcfd2eb9b660c';
 
 /// Copied from Dart SDK
 class _SystemHash {

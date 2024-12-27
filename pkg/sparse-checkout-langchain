@@ -1,0 +1,5 @@
+git clone --no-checkout https://github.com/haitr/langchain_dart.git
+cd langchain_dart
+git config core.sparseCheckout true
+echo "openai_realtime_dart/" > .git/info/sparse-checkout
+git checkout main

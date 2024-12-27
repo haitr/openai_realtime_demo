@@ -19,8 +19,11 @@ final _router = GoRouter(
       builder: (context, state) => ScenarioScreen(),
       routes: [
         GoRoute(
-          path: '/voice',
-          builder: (context, state) => VoiceScreen(),
+          path: '/voice/:id',
+          builder: (context, state) {
+            final scenarioId = int.parse(state.pathParameters['id']!);
+            return VoiceScreen(scenarioId: scenarioId);
+          },
         ),
       ],
     ),

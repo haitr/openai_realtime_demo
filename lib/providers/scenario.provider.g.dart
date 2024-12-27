@@ -6,7 +6,7 @@ part of 'scenario.provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$scenarioHash() => r'5aff5cbf01ee40ec4c6c6ed7a87d1b9a5dcb1979';
+String _$scenarioHash() => r'd1c3960b3e322912f08e73a43d4aeaf90d96c763';
 
 /// Copied from Dart SDK
 class _SystemHash {

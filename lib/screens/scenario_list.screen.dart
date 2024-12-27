@@ -39,11 +39,12 @@ class ScenarioScreen extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      ShadButton(
-                        child: const Text('Go'),
-                        onPressed: () {
-                          context.push('/scenarios/voice');
-                        },
+                      Padding(
+                        padding: EdgeInsets.only(top: 8),
+                        child: ShadButton(
+                          child: const Text('Go'),
+                          onPressed: () => context.push('/scenarios/voice/${item.id}'),
+                        ),
                       )
                     ],
                   );
@@ -53,7 +54,7 @@ class ScenarioScreen extends ConsumerWidget {
           ),
         ),
         floatingActionButton: ShadButton(
-          child: const Icon(Icons.add, color: Colors.white),
+          child: Icon(Icons.add, color: Theme.of(context).colorScheme.onPrimary),
           onPressed: () {},
         ));
   }
