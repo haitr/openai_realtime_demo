@@ -22,7 +22,7 @@ final audioStreamProvider = AutoDisposeStreamProvider<Uint8List>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AudioStreamRef = AutoDisposeStreamProviderRef<Uint8List>;
-String _$conversationHash() => r'b35571892b22c3306f10eadf59edcfd2eb9b660c';
+String _$conversationHash() => r'4deefdd87b8c72b23715d30600a59a43bb176aa7';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -174,5 +174,20 @@ class _ConversationProviderElement
   @override
   int get scenarioId => (origin as ConversationProvider).scenarioId;
 }
+
+String _$playerHash() => r'054adf15346c806df998271c6d9802abb03adb9e';
+
+/// See also [Player].
+@ProviderFor(Player)
+final playerProvider = NotifierProvider<Player, Player>.internal(
+  Player.new,
+  name: r'playerProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$playerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Player = Notifier<Player>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

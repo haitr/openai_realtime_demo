@@ -5,40 +5,50 @@ import 'package:openai_realtime_dart/openai_realtime_dart.dart';
 import '../providers/providers.dart';
 
 abstract class MessageItem extends StatelessWidget {
-  final Item item;
+  final FormattedItem formattedItem;
+  const MessageItem(this.formattedItem, {super.key});
 
-  const MessageItem(this.item, {super.key});
-
-  factory MessageItem.from(Item item) {
-    if (item case ItemMessage item) {
+  factory MessageItem.from(FormattedItem formattedItem) {
+    debugPrint('message: ${formattedItem.item.type}');
+    if (formattedItem.item case ItemMessage item) {
       return switch (item.role) {
-        ItemRole.user => MyMessageItem(item),
-        ItemRole.assistant => AiMessageItem(item),
-        ItemRole.system => DefaultMessageItem(item),
+        ItemRole.user => MyMessageItem(formattedItem, item),
+        ItemRole.assistant => AiMessageItem(formattedItem, item),
+        ItemRole.system => DefaultMessageItem(formattedItem),
       };
     }
-    return DefaultMessageItem(item);
+    return DefaultMessageItem(formattedItem);
   }
 }
 
 class DefaultMessageItem extends MessageItem {
-  const DefaultMessageItem(super.item, {super.key});
+  const DefaultMessageItem(super.formattedItem, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(4),
       margin: const EdgeInsets.all(4),
-      child: Text(item.type.toString()),
+      child: Text(formattedItem.item.type.toString(), style: const TextStyle(color: Colors.white)),
     );
   }
 }
 
 class MyMessageItem extends MessageItem {
-  const MyMessageItem(super.item, {super.key});
+  final ItemMessage item;
+
+  const MyMessageItem(super.formattedItem, this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    // item.content.map((e) => print(e.type)).toList();
+    // return Column(
+    //   children: item.content
+    //       .map(
+    //         (e) => Text(e.text),
+    //       )
+    //       .toList(),
+    // );
     return Container(
       padding: const EdgeInsets.all(4),
       margin: const EdgeInsets.all(4),
@@ -46,13 +56,15 @@ class MyMessageItem extends MessageItem {
         color: Colors.purple,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Text(item.type.toString()),
+      child: Text(formattedItem.formatted?.text ?? ''),
     );
   }
 }
 
 class AiMessageItem extends MessageItem {
-  const AiMessageItem(super.item, {super.key});
+  final ItemMessage item;
+
+  const AiMessageItem(super.formattedItem, this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +94,7 @@ class VoiceScreen extends ConsumerWidget {
         child: ref.watch(conversationProvider(scenarioId)).maybeWhen(
               orElse: () => const Center(child: CircularProgressIndicator()),
               data: (conversation) => ListView.builder(
-                itemBuilder: (context, index) => MessageItem.from(conversation[index].item),
+                itemBuilder: (context, index) => MessageItem.from(conversation[index]),
                 itemCount: conversation.length,
               ),
             ),

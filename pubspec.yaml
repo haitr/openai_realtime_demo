@@ -22,10 +22,9 @@ dependencies:
   riverpod_annotation: ^2.6.1
   go_router: ^14.6.2
   openai_realtime_dart: ^0.0.3+1
-  flutter_sound: ^9.2.13
   record: ^5.2.0
   permission_handler: ^11.3.0
-  audio_session: ^0.1.23
+  flutter_sound: ^9.17.8
 
 dev_dependencies:
   flutter_test:
